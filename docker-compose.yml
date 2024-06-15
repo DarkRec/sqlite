@@ -1,0 +1,18 @@
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: dockerfile_builder.Dockerfile
+    image: sqlite_builder
+
+  tester:
+    build:
+      context: .
+      dockerfile: dockerfile_tester.Dockerfile
+    image: sqlite_tester
+    depends_on:
+      - builder
+
+networks:
+  sqlite_network:
+    driver: bridge
